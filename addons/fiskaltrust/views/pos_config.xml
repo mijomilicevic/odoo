@@ -4,15 +4,36 @@
         <field name="name">pos.config.form.view.inherit</field>
         <field name="model">pos.config</field>
         <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+
         <field name="arch" type="xml">
-            <field name="is_posbox" position="after">
-                <field name="_isFiskaltrust" />
-            </field>
-            <!-- <xpath expr="//field[@name='module_pos_hr']" position='after'>
-                <field name="cashbox_id" invisible="1"/>
-                <field name="access_token" invisible="1"/>
-                <field name="baseurl" invisible="1"/>
-            </xpath> -->
+            <xpath expr="//div[@id='other_devices']//div[hasclass('o_setting_right_pane')]" position="after">
+
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field name="_isFiskaltrust" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="_isFiskaltrust" string="Fiskaltrust Middleware"/>
+                        <div class="text-muted mb16">
+                            Connect devices using Fiskaltrust Middleware
+                        </div>
+                        <div class="content-group pos_iot_config" attrs="{'invisible' : [('_isFiskaltrust', '=', False)]}">
+                            <div class="row">
+                                <label string="CashboxId" for="_cashboxId" class="col-lg-4 o_light_label"/>
+                                <field name="_cashboxId"/>
+                            </div>
+                            <div class="row">
+                                <label string="AccessToken" for="_accessToken" class="col-lg-4 o_light_label"/>
+                                <field name="_accessToken"/>
+                            </div>
+                            <div class="row">
+                                <label string="BaseUrl" for="_baseUrl" class="col-lg-4 o_light_label"/>
+                                <field name="_baseUrl"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
         </field>
     </record>
 </odoo>
